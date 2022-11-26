@@ -7,7 +7,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
-import { RegistrationModalComponent } from './components/registration-modal/registration-modal.component';
+import {RegistrationModalComponent} from './components/registration-modal/registration-modal.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,10 @@ import { RegistrationModalComponent } from './components/registration-modal/regi
     RegistrationModalComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     CommonModule,
-    AppRoutingModule,
+    FontAwesomeModule,
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule

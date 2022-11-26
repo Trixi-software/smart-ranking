@@ -28,11 +28,24 @@
         <div class="invalid-feedback">Prosím vyplňte příjmení.</div>
       </div>
 
-      <!--  TODO RSK add date picker  -->
       <div class="mb-3">
         <label for="dateOfBirth" class="form-label">Datum narození</label>
-        <input id="dateOfBirth" type="text" class="form-control" [formControl]="dateOfBirthControl" required/>
-        <div class="invalid-feedback">Prosím vyplňte datum narození.</div>
+        <div class="input-group">
+          <input id="dateOfBirth"
+                 class="form-control"
+                 placeholder="rok-mesic-den"
+                 name="dateOfBirth"
+                 [formControl]="dateOfBirthControl"
+                 ngbDatepicker
+                 required
+                 #d="ngbDatepicker"/>
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  (click)="d.toggle()">
+            <fa-icon [icon]="faCalendar"></fa-icon>
+          </button>
+          <div class="invalid-feedback">Prosím vyplňte datum narození.</div>
+        </div>
       </div>
 
       <div class="mb-3">

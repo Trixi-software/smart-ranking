@@ -7,6 +7,7 @@ import {finalize} from "rxjs";
 import {RankResponse} from "../../api/types/rank-response";
 import {RankApiService} from "../../api/services/rank-api.service";
 import {RegistrationFlow} from "../../types/registration-flow.enum";
+import {faCalendar, faCoffee} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-registration-modal',
@@ -15,6 +16,7 @@ import {RegistrationFlow} from "../../types/registration-flow.enum";
 })
 export class RegistrationModalComponent implements OnInit {
 
+  faCalendar = faCalendar;
   registrationFlowEnum = RegistrationFlow;
 
   rankInProgress: boolean;
