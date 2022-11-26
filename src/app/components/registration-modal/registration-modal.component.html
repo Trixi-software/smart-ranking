@@ -1,0 +1,123 @@
+<div class="modal-header border-bottom-0" [ngSwitch]="registrationFlow">
+  <ng-container *ngSwitchCase="registrationFlowEnum.REGISTRATION">
+    <h4 class="modal-title">Nová registrace</h4>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="registrationFlowEnum.RANK_RESULT">
+    <h4 class="modal-title">Vítejte na eshop.cz</h4>
+  </ng-container>
+</div>
+
+<div class="modal-body d-flex flex-column justify-content-start align-items-center" [ngSwitch]="registrationFlow">
+
+  <form [formGroup]="form"
+        [ngClass]="{'was-validated': formRef.submitted}"
+        (ngSubmit)="register()"
+        class="row needs-validation"
+        #formRef="ngForm">
+    <ng-container *ngSwitchCase="registrationFlowEnum.REGISTRATION">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">Jméno</label>
+        <input id="firstName" type="text" class="form-control" [formControl]="firstNameControl" required/>
+        <div class="invalid-feedback">Prosím vyplňte jméno.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Příjmení</label>
+        <input id="lastName" type="text" class="form-control" [formControl]="lastNameControl" required/>
+        <div class="invalid-feedback">Prosím vyplňte příjmení.</div>
+      </div>
+
+      <!--  TODO RSK add date picker  -->
+      <div class="mb-3">
+        <label for="dateOfBirth" class="form-label">Datum narození</label>
+        <input id="dateOfBirth" type="text" class="form-control" [formControl]="dateOfBirthControl" required/>
+        <div class="invalid-feedback">Prosím vyplňte datum narození.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="personalAddressStreet" class="form-label">Ulice</label>
+        <input id="personalAddressStreet" type="text" class="form-control" [formControl]="personalAddressStreetControl"
+               required/>
+        <div class="invalid-feedback">Prosím vyplňte ulici.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="personalAddressCity" class="form-label">Město</label>
+        <input id="personalAddressCity" type="text" class="form-control" [formControl]="personalAddressCityControl"
+               required/>
+        <div class="invalid-feedback">Prosím vyplňte město.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="personalAddressZip" class="form-label">PSČ</label>
+        <input id="personalAddressZip" type="text" class="form-control" [formControl]="personalAddressZipControl"
+               required/>
+        <div class="invalid-feedback">Prosím vyplňte PSČ.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="taxNumber" class="form-label">DIČ</label>
+        <input id="taxNumber" type="text" class="form-control" [formControl]="taxNumberControl"/>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="registrationFlowEnum.RANK_RESULT">
+      <ng-container [ngSwitch]="finalRank?.personRank">
+        <ng-container *ngSwitchCase="1">
+          <h5>Na úvod máme pro Vás pár výhod:</h5>
+          <ul class="list-unstyled">
+            <li>Doprava zdarma</li>
+            <li>Sleva 10% na veškeré zboží</li>
+          </ul>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="2">
+          <h5>Na úvod máme pro Vás pár výhod:</h5>
+          <ul class="list-unstyled">
+            <li>Doprava zdarma</li>
+          </ul>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="3">
+          <h4>Přejeme Vám příjemné nákupy</h4>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="4">
+          <h5>Na úvod máme pro Vás pár informací:</h5>
+          <ul class="list-unstyled">
+            <li>Nákup zboží není možný na dobírku</li>
+          </ul>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="5">
+          <h5 class="text-danger">Omlouváme se, nejste hoden nákupů na eshop.cz</h5>
+          <h6>Nicméně jsme vás zaregistrovali a věříme, že se znova stanete člověkem a prožijeme spolu nezapomenutelné
+            nákupy.</h6>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </form>
+
+</div>
+
+<div class="modal-footer col-12 justify-content-between text-center pr-0">
+  <button type="button" class="btn btn-outline-primary" (click)="close()">Zrušit</button>
+  <button *ngIf="registrationFlowEnum.REGISTRATION === registrationFlow"
+          type="submit"
+          class="btn btn-primary position-relative"
+          (click)="formRef.onSubmit($event)">
+    <div class="spinner-wrapper">
+      <span *ngIf="rankInProgress"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true">
+      </span>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center"
+         [ngClass]="{'invisible': rankInProgress}">
+      <span>Dokončit registraci</span>
+    </div>
+  </button>
+</div>
