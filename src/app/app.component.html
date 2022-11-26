@@ -1,12 +1,35 @@
 <div>
-
-  <header></header>
+  <header>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="container d-flex justify-content-between">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <fa-icon [icon]="faLeaf"></fa-icon>
+          <strong>eshop.cz</strong>
+        </a>
+        <button class="btn btn-success" (click)="onRegister()">Nová registrace</button>
+      </div>
+    </div>
+  </header>
 
   <!-- content -->
-  <div class="container">
-    <button class="btn btn-primary" (click)="onRegister()">Nová registrace</button>
+  <div class="container mt-5">
+    <div class="row">
+      <div *ngFor="let product of products"
+           class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <h4>{{product}}</h4>
+              <fa-icon [icon]="faLeaf"></fa-icon>
+            </div>
+            <p class="card-text">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+              scrambled it to make a type specimen book.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- footer -->
-  <div></div>
 </div>

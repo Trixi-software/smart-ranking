@@ -37,6 +37,7 @@
                  name="dateOfBirth"
                  [formControl]="dateOfBirthControl"
                  ngbDatepicker
+                 readonly
                  required
                  #d="ngbDatepicker"/>
           <button type="button"
@@ -80,15 +81,15 @@
         <ng-container *ngSwitchCase="1">
           <h5>Na úvod máme pro Vás pár výhod:</h5>
           <ul class="list-unstyled">
-            <li>Doprava zdarma</li>
-            <li>Sleva 10% na veškeré zboží</li>
+            <li><fa-icon [icon]="faCircleCheck" class="text-success"></fa-icon> Doprava zdarma</li>
+            <li><fa-icon [icon]="faCircleCheck" class="text-success"></fa-icon> Sleva 10% na veškeré zboží</li>
           </ul>
         </ng-container>
 
         <ng-container *ngSwitchCase="2">
           <h5>Na úvod máme pro Vás pár výhod:</h5>
           <ul class="list-unstyled">
-            <li>Doprava zdarma</li>
+            <li><fa-icon [icon]="faCircleCheck" class="text-success"></fa-icon> Doprava zdarma</li>
           </ul>
         </ng-container>
 
@@ -99,7 +100,10 @@
         <ng-container *ngSwitchCase="4">
           <h5>Na úvod máme pro Vás pár informací:</h5>
           <ul class="list-unstyled">
-            <li>Nákup zboží není možný na dobírku</li>
+            <li>
+              <fa-icon [icon]="faTriangleExclamation" class="text-warning"></fa-icon>
+              Nákup zboží není možný na dobírku
+            </li>
           </ul>
         </ng-container>
 

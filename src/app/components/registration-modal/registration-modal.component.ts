@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RankRequest} from "../../api/types/rank-request";
 import {Address} from "../../api/types/address";
@@ -7,7 +7,7 @@ import {finalize} from "rxjs";
 import {RankResponse} from "../../api/types/rank-response";
 import {RankApiService} from "../../api/services/rank-api.service";
 import {RegistrationFlow} from "../../types/registration-flow.enum";
-import {faCalendar, faCoffee} from '@fortawesome/free-solid-svg-icons';
+import {faCalendar, faCircleCheck, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-registration-modal',
@@ -17,6 +17,8 @@ import {faCalendar, faCoffee} from '@fortawesome/free-solid-svg-icons';
 export class RegistrationModalComponent implements OnInit {
 
   faCalendar = faCalendar;
+  faTriangleExclamation = faTriangleExclamation;
+  faCircleCheck = faCircleCheck;
   registrationFlowEnum = RegistrationFlow;
 
   rankInProgress: boolean;
@@ -117,7 +119,7 @@ export class RegistrationModalComponent implements OnInit {
     return {
       firstName: this.firstNameControl.value,
       sureName: this.lastNameControl.value,
-      birthDate: this.dateOfBirthControl.value,
+      birthDate: this.parseDate(this.dateOfBirthControl.value),
       address: {
         street: this.personalAddressStreetControl.value,
         city: this.personalAddressCityControl.value,
@@ -125,6 +127,10 @@ export class RegistrationModalComponent implements OnInit {
       } as Address,
       taxNumber: !!this.taxNumberControl.value ? this.taxNumberControl.value : undefined
     } as RankRequest;
+  }
+
+  private parseDate(date: NgbDateStruct): string {
+    return `${date.year}-${date.month}-${date.day}`;
   }
 
   private sendRank(request: RankRequest): void {
